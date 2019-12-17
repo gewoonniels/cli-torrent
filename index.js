@@ -1,10 +1,13 @@
 'use strict';
 
-const tracker = require('./tracker');
-const torrenParser = require('./torrent-parser');
+const tracker = require('./src/tracker');
+const torrenParser = require('./src/torrent-parser');
 
-const torrent = torrenParser.open('music.torrent');
+const torrent = torrenParser.open(process.argv[2]);
 
+// download(torrent);
 tracker.getPeers(torrent,peers => {
-    console.log(`list of peers ${peers[0].ip}, ${peers[0].port}`);
+    peers.forEach(peer => {
+        console.log(`peer: ${peer.ip}, ${peer.port}`)
+    });
 })
